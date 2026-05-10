@@ -3,7 +3,7 @@ import Sidebar from "../components/Sidebar";
 import TeamBidCard from "../components/TeamBidCard";
 import io from "socket.io-client";
 
-const socket = io("https://bidarena.onrender.com", {
+const socket = io(import.meta.env.VITE_SOCKET_URL || "https://bidarena.onrender.com", {
   transports: ["websocket", "polling"]
 });
 
