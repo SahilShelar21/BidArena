@@ -3,7 +3,9 @@ import Sidebar from "../components/Sidebar";
 import TeamBidCard from "../components/TeamBidCard";
 import io from "socket.io-client";
 
-const socket = io("https://bidarena.onrender.com");
+const socket = io("https://bidarena.onrender.com", {
+  transports: ["websocket", "polling"]
+});
 
 export default function AuctionRoom(){
 
