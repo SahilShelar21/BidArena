@@ -18,6 +18,14 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
+app.use(cors({
+  origin: [
+    "https://frontend-299v.onrender.com"
+  ],
+  credentials: true
+}));
+
 // Rate limiting
 const limiter = rateLimit({
   windowMs: 15 * 60 * 1000, // 15 minutes
