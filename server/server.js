@@ -1,10 +1,7 @@
-const express = require("express");
+require('dotenv').config();
 const http = require("http");
 const { Server } = require("socket.io");
-const cors = require("cors");
-
-const app = express();
-app.use(cors());
+const app = require('./app');
 
 const server = http.createServer(app);
 
@@ -15,8 +12,7 @@ const io = new Server(server, {
   }
 });
 
-io.on("connection", (socket)=>{
-  console.log("User Connected");
-});
+require('./socket/auctionSocket')(io);
 
-server.listen(5000, ()=>console.log("Server Running on port 5000"));
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, ()=>console.log(`Server Running on port ${PORT}`));
