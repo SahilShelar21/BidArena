@@ -1,18 +1,23 @@
-require('dotenv').config();
-const http = require("http");
-const { Server } = require("socket.io");
-const app = require('./app');
+const express = require("express");
+const cors = require("cors");
+require("dotenv").config();
 
-const server = http.createServer(app);
+const app = express();
 
-const io = new Server(server, {
-  cors: {
-    origin: "https://frontend-299v.onrender.com",
-    methods: ["GET","POST"]
-  }
+app.use(cors({
+  origin: [
+    "http://localhost:5173",
+    "https://frontend-299v.onrender.com"
+  ],
+  credentials: true
+}));
+
+app.use(express.json());
+
+app.get("/", (req, res) => {
+  res.send("Backend Running");
 });
 
-require('./socket/auctionSocket')(io);
-
-const PORT = process.env.PORT || 5000;
-server.listen(PORT, ()=>console.log(`Server Running on port ${PORT}`));
+app.listen(5000, () => {
+  console.log("Server running on port 5000");
+});
