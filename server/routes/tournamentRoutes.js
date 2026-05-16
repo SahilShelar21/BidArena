@@ -4,7 +4,7 @@ const {
   getTournaments,
 } = require("../controllers/tournamentController");
 
-const upload = require("../middlewares/upload");
+const upload = require("../middleware/upload");
 
 const router = express.Router();
 
