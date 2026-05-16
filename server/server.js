@@ -1,25 +1,14 @@
-const express = require("express");
-const cors = require("cors");
+const app = require("./app");
 require("dotenv").config();
 
-const app = express();
+const PORT = process.env.PORT || 5000;
 
-app.use(cors({
-  origin: [
-    "http://localhost:5173",
-    "https://frontend-299v.onrender.com"
-  ],
-  credentials: true
-}));
-
-app.use(express.json());
+app.use("/uploads", require("express").static("uploads"));
 
 app.get("/", (req, res) => {
   res.send("Backend Running");
 });
 
-app.listen(5000, () => {
-  console.log("Server running on port 5000");
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT}`);
 });
-
-app.use("/uploads", express.static("uploads"));
